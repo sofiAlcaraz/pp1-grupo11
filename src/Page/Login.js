@@ -19,7 +19,14 @@ import { useCallback, useRef, useState } from "react";
 
 const theme = createTheme();
 
-export default function SingIn() {
+
+const videoConstraints = {
+  width: "200",
+  height: "300",
+  margin: "5px"
+};
+
+export default function Login() {
 
   const [imgSrc, setImgSrc] = useState(null);
   const webcamRef = useRef(null);
@@ -45,7 +52,7 @@ export default function SingIn() {
       body: JSON.stringify({
         email: data.get('email'),
         password: data.get('password'),
-        photo:imgSrc
+        photo: imgSrc
       })
     };
     fetch('https://k9lcx9c6n9.execute-api.us-east-1.amazonaws.com/dev/user', requestOptions)
@@ -70,7 +77,7 @@ export default function SingIn() {
 
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Login
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -79,7 +86,7 @@ export default function SingIn() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Direccion de Email"
                   name="email"
                   autoComplete="email"
                 />
@@ -89,28 +96,32 @@ export default function SingIn() {
 
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="Contraseña"
                   type="password"
                   id="password"
                   autoComplete="new-password"
                 />
               </Grid>
               <Grid item xs={12}>
-                <Webcam
-                  audio={false}
-                  screenshotFormat="image/jpeg"
-                  ref={webcamRef}
+                <div style={{ display: 'flex', margin: '5px' }}>
+                  <Webcam
+                    audio={false}
+                    screenshotFormat="image/jpeg"
+                    ref={webcamRef}
+                    videoConstraints={videoConstraints}
+                  >
 
-                >
+                  </Webcam>
 
-                </Webcam>
-                <Button onClick={capture}>Capture photo</Button>
-                {imgSrc && (
-                  <img
-                    src={imgSrc}
-                  />
-                )}
+                  {imgSrc && (
+                    <img  style={{margin:'5px'}} 
+                      src={imgSrc}
+                    />
+                  )}
+                </div>
+                <Button onClick={capture}>Tomar foto</Button>
               </Grid>
+
 
             </Grid>
             <Button
@@ -119,12 +130,12 @@ export default function SingIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Ingresar
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                <Link href="/Register" variant="body2">
+                  No tienes cuenta? Registrate aqui!
                 </Link>
               </Grid>
             </Grid>

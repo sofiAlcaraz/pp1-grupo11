@@ -1,10 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './Page/Home';
-import SingIn from './Page/SingIn';
-import SignUp from './Page/SingUp';
-
+import Login from './Page/Login';
+import Register from './Page/Register';
 function App() {
   return (
     <div className="App">
@@ -23,8 +21,8 @@ function App() {
         </Routes>*/}
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/SingIn" element={<SingIn />} />
-        <Route path="/SingUp" element={<SignUp />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </div>
   );

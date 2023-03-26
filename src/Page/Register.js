@@ -17,7 +17,14 @@ import { useCallback, useRef, useState } from "react";
 
 const theme = createTheme();
 
-export default function SignUp() {
+const videoConstraints = {
+    width: "200",
+    height: "300",
+    margin: "5px"
+  };
+  
+
+export default function Register() {
 
     const [imgSrc, setImgSrc] = useState(null);
     const webcamRef = useRef(null);
@@ -44,7 +51,7 @@ export default function SignUp() {
                 lastName: data.get('lastName'),
                 email: data.get('email'),
                 password: data.get('password'),
-                photo:imgSrc
+                photo: imgSrc
             })
         };
         fetch('https://k9lcx9c6n9.execute-api.us-east-1.amazonaws.com/dev/user', requestOptions)
@@ -67,11 +74,8 @@ export default function SignUp() {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                        {/*<LockOutlinedIcon />*/}
-                    </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        Crea tu cuenta
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -79,10 +83,9 @@ export default function SignUp() {
                                 <TextField
                                     autoComplete="given-name"
                                     name="name"
-                                    required
                                     fullWidth
                                     id="name"
-                                    label="First Name"
+                                    label="Nombre"
                                     autoFocus
                                 />
                             </Grid>
@@ -91,17 +94,17 @@ export default function SignUp() {
 
                                     fullWidth
                                     id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
+                                    label="Apellido"
+                                    name="Last Name"
                                     autoComplete="family-name"
                                 />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-
+                                    required
                                     fullWidth
                                     id="email"
-                                    label="Email Address"
+                                    label="Direccion de Email"
                                     name="email"
                                     autoComplete="email"
                                 />
@@ -111,27 +114,30 @@ export default function SignUp() {
 
                                     fullWidth
                                     name="password"
-                                    label="Password"
+                                    label="Contraseña"
                                     type="password"
                                     id="password"
-                                    autoComplete="new-password"
                                 />
                             </Grid>
+                            
                             <Grid item xs={12}>
-                                <Webcam
+                                <div style={{display:'flex', margin:'5px'}}>
+                                <Webcam 
                                     audio={false}
                                     screenshotFormat="image/jpeg"
                                     ref={webcamRef}
-
+                                    videoConstraints={videoConstraints}
                                 >
 
                                 </Webcam>
-                                <Button onClick={capture}>Capture photo</Button>
                                 {imgSrc && (
-                                    <img
+                                    <img style={{margin:'5px'}} 
                                         src={imgSrc}
                                     />
                                 )}
+                                </div>
+                                <Button onClick={capture}>Tomar foto</Button>
+                               
                             </Grid>
 
                         </Grid>
@@ -141,12 +147,12 @@ export default function SignUp() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Sign Up
+                            Crear cuenta
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
-                                <Link href="#" variant="body2">
-                                    Already have an account? Sign in
+                                <Link href="/" variant="body2">
+                                    Ya tienes cuenta? Accede aqui!
                                 </Link>
                             </Grid>
                         </Grid>
