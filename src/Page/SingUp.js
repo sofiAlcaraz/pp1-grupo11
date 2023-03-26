@@ -19,7 +19,7 @@ const theme = createTheme();
 
 export default function SignUp() {
 
-    const [imgSrc, setImgSrc] =useState(null);
+    const [imgSrc, setImgSrc] = useState(null);
     const webcamRef = useRef(null);
 
     const capture = useCallback(() => {
@@ -35,6 +35,22 @@ export default function SignUp() {
             email: data.get('email'),
             password: data.get('password'),
         });
+
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: data.get('name'),
+                lastName: data.get('lastName'),
+                email: data.get('email'),
+                password: data.get('password'),
+                photo:imgSrc
+            })
+        };
+        fetch('https://k9lcx9c6n9.execute-api.us-east-1.amazonaws.com/dev/user', requestOptions)
+            .then(response => response.json())
+            .then(data => console.log(data));
+
     };
 
 
@@ -62,10 +78,10 @@ export default function SignUp() {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="given-name"
-                                    name="firstName"
+                                    name="name"
                                     required
                                     fullWidth
-                                    id="firstName"
+                                    id="name"
                                     label="First Name"
                                     autoFocus
                                 />
