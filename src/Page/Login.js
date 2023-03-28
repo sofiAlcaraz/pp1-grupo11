@@ -8,7 +8,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -21,7 +21,7 @@ const theme = createTheme();
 
 
 const videoConstraints = {
-  width: "200",
+  width: "400",
   height: "300",
   margin: "5px"
 };
@@ -30,6 +30,7 @@ export default function Login() {
 
   const [imgSrc, setImgSrc] = useState(null);
   const webcamRef = useRef(null);
+  const [user, setUser] = useState(null);
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
@@ -57,8 +58,11 @@ export default function Login() {
     };
     fetch('https://k9lcx9c6n9.execute-api.us-east-1.amazonaws.com/dev/user', requestOptions)
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => setUser(data));
   };
+  if (user) {
+    window.location.replace("/home");
+  }
 
 
   return (
@@ -103,23 +107,25 @@ export default function Login() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <div style={{ display: 'flex', margin: '5px' }}>
-                  <Webcam
-                    audio={false}
-                    screenshotFormat="image/jpeg"
-                    ref={webcamRef}
-                    videoConstraints={videoConstraints}
-                  >
+              <div style={{ display: 'flex', margin: '5px' }}>
+                                    {(!imgSrc) ? <Webcam
+                                        audio={false}
+                                        screenshotFormat="image/jpeg"
+                                        ref={webcamRef}
+                                        videoConstraints={videoConstraints}
+                                    >
+                                    </Webcam> :
+                                        (
+                                            <img style={{ margin: '5px' }}
+                                                src={imgSrc}
+                                            />
+                                        )
+                                    }
+                                </div>
 
-                  </Webcam>
-
-                  {imgSrc && (
-                    <img  style={{margin:'5px'}} 
-                      src={imgSrc}
-                    />
-                  )}
-                </div>
-                <Button onClick={capture}>Tomar foto</Button>
+                                {imgSrc ? <Button color={'error'} onClick={() => setImgSrc(null)} s startIcon={<DeleteIcon />}>
+                                    Descartar foto
+                                </Button> : <Button onClick={capture}>Tomar foto</Button>}
               </Grid>
 
 
