@@ -49,6 +49,7 @@ const [botton,setBotton]=useState(true);
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
+    setBotton(false)
   }, [webcamRef, setImgSrc]);
 
 
@@ -164,7 +165,7 @@ const [botton,setBotton]=useState(true);
                     }
                   </div>
 
-                  {imgSrc ? <Button color={'error'} onClick={() => setImgSrc(null)} s startIcon={<DeleteIcon />}>
+                  {imgSrc ? <Button color={'error'} onClick={() =>{setBotton(true); setImgSrc(null)}} s startIcon={<DeleteIcon />}>
                     Descartar foto
                   </Button> : <Button onClick={capture}>Tomar foto</Button>}
                 </Grid>
