@@ -84,11 +84,6 @@ export default function Register() {
             })
     };
 
-    if (user) {
-        window.location.replace("/home");
-    }
-
-
     return (
         <>
             <Modal
