@@ -122,7 +122,7 @@ const [botton,setBotton]=useState(true);
 
             </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+              Iniciar Sesión
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
