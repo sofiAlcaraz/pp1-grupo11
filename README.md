@@ -3,5 +3,4 @@ https://docs.google.com/presentation/d/1BCNY6pU3-e9qTWaGiFOndIY4aJB3eDT2nZLWqQ99
 
 https://docs.google.com/presentation/d/1jDC38tU5tlog0eJ4vUkDvgah4eCTxBG04ZgkDjZMbY8/edit?usp=sharing
 
-https://drive.google.com/drive/u/0/search?q=proyecto%20profesional
 
